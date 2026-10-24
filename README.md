@@ -4,11 +4,11 @@ An intelligent agent that has to rescue Colonel Kurtz from a palace full of dead
 
 The project walks through the core toolkit of classical AI, with **one environment and increasingly realistic assumptions**:
 
-| Part | Problem | Technique | Main file |
+| Part | Problem | Technique | Folder |
 |---|---|---|---|
-| **1** | Explore a 6×6 palace with pits and an enemy soldier, find Kurtz, reach the exit | **Propositional knowledge base** + **BFS** over cells proven safe | `kurtz.py` |
-| **2.1** | Same palace, but with three different traps that can share a cell, and only noisy perceptions | **Bayesian inference** (probability maps per hazard) + **risk-aware A\*** | `palacio.py` |
-| **2.2** | Cross a river whose current randomly pushes the boat downstream | **Markov Decision Process** solved with **Value Iteration** | `river_mdp.py` |
+| **1** | Explore a 6×6 palace with pits and an enemy soldier, find Kurtz, reach the exit | **Propositional knowledge base** + **BFS** over cells proven safe | [`part1_logic_bfs/`](part1_logic_bfs) |
+| **2.1** | Same palace, but with three different traps that can share a cell, and only noisy perceptions | **Bayesian inference** (probability maps per hazard) + **risk-aware A\*** | [`part2_bayes_astar/`](part2_bayes_astar) |
+| **2.2** | Cross a river whose current randomly pushes the boat downstream | **Markov Decision Process** solved with **Value Iteration** | [`part2_river_mdp/`](part2_river_mdp) |
 
 > Final project for *Fundamentals of Artificial Intelligence*, BSc in Mathematical Engineering & AI, Universidad Pontificia Comillas (2025/26).
 
@@ -77,10 +77,10 @@ Pure Python 3, with no external dependencies.
 git clone https://github.com/adrianalorenzo/finding-colonel-kurtz.git
 cd finding-colonel-kurtz
 
-python kurtz.py        # Part 1   → choose A (manual) or B (automatic BFS)
-python palacio.py      # Part 2.1 → choose A (manual) or B (automatic A*)
-python river_mdp.py    # Part 2.2 → optimal policy + simulated crossing
-python benchmark.py    # win rates over 1,000 random maps (~1 min)
+python part1_logic_bfs/kurtz.py        # Part 1   → choose A (manual) or B (automatic BFS)
+python part2_bayes_astar/palacio.py    # Part 2.1 → choose A (manual) or B (automatic A*)
+python part2_river_mdp/river_mdp.py    # Part 2.2 → optimal policy + simulated crossing
+python benchmark.py                    # win rates over 1,000 random maps (~1 min)
 ```
 
 Manual controls: `WASD` to move, `IJKL` to throw the grenade, `E` to exit.
@@ -88,16 +88,19 @@ Manual controls: `WASD` to move, `IJKL` to throw the grenade, `E` to exit.
 ## Repository structure
 
 ```
-├── kurtz.py                 # Part 1: main script (manual / BFS)
-├── map.py                   # Part 1: palace environment
-├── knowledgeBase.py         # Part 1: propositional knowledge base
-├── search.py                # Part 1: BFS over safe cells
-├── palacio.py               # Part 2.1: main script (manual / A*)
-├── palacio_environment.py   # Part 2.1: environment with 3 trap types
-├── palacio_bayes.py         # Part 2.1: Bayesian probability maps
-├── palacio_search.py        # Part 2.1: risk-aware A*
-├── river_mdp.py             # Part 2.2: river environment, MDP, Value Iteration, simulation
-└── benchmark.py             # evaluation over random maps
+├── part1_logic_bfs/
+│   ├── kurtz.py                 # main script (manual / BFS)
+│   ├── map.py                   # palace environment
+│   ├── knowledgeBase.py         # propositional knowledge base
+│   └── search.py                # BFS over safe cells
+├── part2_bayes_astar/
+│   ├── palacio.py               # main script (manual / A*)
+│   ├── palacio_environment.py   # environment with 3 trap types
+│   ├── palacio_bayes.py         # Bayesian probability maps
+│   └── palacio_search.py        # risk-aware A*
+├── part2_river_mdp/
+│   └── river_mdp.py             # river environment, MDP, Value Iteration, simulation
+└── benchmark.py                 # evaluation over random maps
 ```
 
 ## Possible extensions
