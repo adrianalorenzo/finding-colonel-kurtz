@@ -13,13 +13,20 @@ Usage:
 import argparse
 import contextlib
 import io
+import os
 import random
 import statistics
+import sys
 from collections import Counter
 
-import kurtz
-import palacio
-import river_mdp
+# The agents live in one folder per part; make them importable from here.
+ROOT = os.path.dirname(os.path.abspath(__file__))
+for folder in ("part1_logic_bfs", "part2_bayes_astar", "part2_river_mdp"):
+    sys.path.insert(0, os.path.join(ROOT, folder))
+
+import kurtz  # noqa: E402
+import palacio  # noqa: E402
+import river_mdp  # noqa: E402
 
 
 def run_silently(fn, *args, **kwargs):
